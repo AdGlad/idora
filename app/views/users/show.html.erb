@@ -1,0 +1,4 @@
+<h1>Home page for <%=@user.username%></h1>
+
+<%= gravatar_for @user %>
+<%= render 'collections/collection', obj: @user.collections %>
