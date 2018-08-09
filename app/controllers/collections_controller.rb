@@ -8,7 +8,9 @@ end
 def create
 
   @collection=Collection.new(collection_params)
-  @collection.user_id=1
+  debugger
+  #@collection.user_id=1
+  @collection.user=User.first
   if @collection.save
      flash[:notice] = "Collection successfully saved"
      redirect_to collection_path(@collection)
