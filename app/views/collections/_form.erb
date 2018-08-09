@@ -1,0 +1,22 @@
+<% if @collection.errors.any? %>
+<ul>
+ <% @collection.errors.full_messages.each do |msg| %>
+   <li><%= msg %></li>
+ <% end %>
+</ul>
+<% end %>
+
+<%= form_for @collection do |f| %>
+ <p>
+  <%= f.label :collectionid %> <br/>
+  <%= f.text_field :collectionid %>
+ </p>
+ <p>
+  <%= f.label :description %> <br/>
+  <%= f.text_field :description %>
+ </p>
+ <p>
+ <%= f.submit %>
+ </p>
+<% end %>
+<%= link_to "Return to collections", collections_path %>
