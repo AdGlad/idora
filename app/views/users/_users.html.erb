@@ -1,0 +1,21 @@
+<p>
+<%= link_to "Create new user", signup_path %>
+</p>
+
+<table>
+  <tr>
+   <th>User </th>
+   <th>email </th>
+  </tr>
+
+ <% obj.each do |user| %>
+ <tr>
+   <td><%= user.username %></td>
+   <td><%= user.email %></td>
+   <small>
+   <td><%= link_to "Edit", edit_user_path(user) %></td>
+   <td><%= link_to "Show", user_path(user) %></td>
+   <td><%= link_to "Delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"}%> </td>
+  </tr>
+ <% end %>
+</table>

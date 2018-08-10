@@ -2,13 +2,14 @@ class CollectionsController < ApplicationController
   before_action :set_collection, only: [:edit, :update, :show, :destroy]
 
 def index
-  @collections = Collection.all
+  @collections = Collection.paginate(page: params[:page], per_page: 5)
+  #@collections = Collection.all
 end
  
 def create
 
   @collection=Collection.new(collection_params)
-  debugger
+  #debugger
   #@collection.user_id=1
   @collection.user=User.first
   if @collection.save
