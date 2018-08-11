@@ -1,5 +1,7 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: [:edit, :update, :show, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
 def index
   @collections = Collection.paginate(page: params[:page], per_page: 5)
@@ -11,7 +13,7 @@ def create
   @collection=Collection.new(collection_params)
   #debugger
   #@collection.user_id=1
-  @collection.user=User.first
+  @collection.user=current_user
   if @collection.save
      flash[:notice] = "Collection successfully saved"
      redirect_to collection_path(@collection)
@@ -58,6 +60,14 @@ end
 
   def set_collection
     @collection=Collection.find(params[:id])
+  end
+  
+  def require_same_user
+    if current_user != @collection.user
+      flash[:danger] = "You can only edit your own collections"
+      redirect_to user_path
+    end
+    
   end
 end
 

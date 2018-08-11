@@ -3,3 +3,10 @@
 <%= gravatar_for @user %>
 <%= will_paginate @user_collections%>
 <%= render 'collections/collection', obj: @user_collections %>
+<% if logged_in? %>
+     <li> <%= link_to 'Log out', logout_path, method: :delete %> </li>
+<% else %>
+     <li> <%= link_to 'Log In', login_path %> </li>
+     <li> <%= link_to 'Sign up', signup_path%> </li>
+<% end %>
+
